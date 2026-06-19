@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SkillAlign — AI Career Recommender</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+
+  <!-- ── HEADER ── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-mark">S</span>
+        <span class="logo-name">SkillAlign</span>
+      </div>
+      <nav class="header-nav">
+        <a href="#how-it-works">How it works</a>
+        <a href="#recommender" class="nav-cta">Try it →</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-eyebrow">AI · Content-Based Filtering</div>
+    <h1 class="hero-title">
+      Match Your Skills to<br/>
+      <em>the Right Career Path</em>
+    </h1>
+    <p class="hero-sub">
+      Enter your skills and let SkillAlign's TF-IDF engine rank 15 tech careers
+      by how closely they match your profile — no guesswork, pure maths.
+    </p>
+    <a href="#recommender" class="hero-btn">Find My Match →</a>
+
+    <!-- Pipeline bar -->
+    <div class="pipeline-bar">
+      <div class="pipe-step">
+        <span class="pipe-num">01</span>
+        <span class="pipe-label">Your Skills</span>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <span class="pipe-num">02</span>
+        <span class="pipe-label">TF-IDF Vectors</span>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <span class="pipe-num">03</span>
+        <span class="pipe-label">Cosine Similarity</span>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step pipe-step--active">
+        <span class="pipe-num">04</span>
+        <span class="pipe-label">Top 3 Matches</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS ── -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="section-eyebrow">The Logic Skeleton</div>
+    <h2 class="section-title">How SkillAlign Thinks</h2>
+    <div class="cards-grid">
+      <div class="info-card">
+        <div class="card-icon">⟨v⟩</div>
+        <h3>Vector Mapping</h3>
+        <p>Your skills and every job role are converted into numerical arrays within a shared vocabulary space.</p>
+      </div>
+      <div class="info-card">
+        <div class="card-icon">∑</div>
+        <h3>TF-IDF Weighting</h3>
+        <p>Rare, specific skills like "PyTorch" score higher than generic ones. SkillAlign rewards what makes you unique.</p>
+      </div>
+      <div class="info-card">
+        <div class="card-icon">cos θ</div>
+        <h3>Cosine Similarity</h3>
+        <p>We measure the angle between your skill vector and each career vector. Score 1.0 = perfect alignment.</p>
+      </div>
+      <div class="info-card">
+        <div class="card-icon">⊤ 3</div>
+        <h3>Top-N Filtering</h3>
+        <p>Results are sorted and the top 3 are shown — giving you focused, actionable career direction.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RECOMMENDER ── -->
+  <section class="recommender" id="recommender">
+    <div class="rec-container">
+
+      <!-- Left: Input -->
+      <div class="rec-left">
+        <div class="section-eyebrow">Input · User State</div>
+        <h2 class="section-title">Enter Your Skills</h2>
+        <p class="rec-desc">Add at least 3 skills or technologies you know. Press Enter or click <strong>+</strong> after each one.</p>
+
+        <div class="skill-input-area">
+          <div class="skill-tags" id="skillTags"></div>
+          <div class="input-row">
+            <input type="text" id="skillInput" placeholder="e.g. Python, Docker, SQL…" autocomplete="off"/>
+            <button class="add-btn" id="addBtn">+</button>
+          </div>
+          <div class="skill-counter" id="skillCounter">0 skills added · need at least 3</div>
+        </div>
+
+        <div class="quick-add">
+          <span class="quick-label">Quick add</span>
+          <div class="quick-chips">
+            <button class="chip" data-skill="Python">Python</button>
+            <button class="chip" data-skill="Machine Learning">Machine Learning</button>
+            <button class="chip" data-skill="SQL">SQL</button>
+            <button class="chip" data-skill="Docker">Docker</button>
+            <button class="chip" data-skill="AWS">AWS</button>
+            <button class="chip" data-skill="JavaScript">JavaScript</button>
+            <button class="chip" data-skill="Deep Learning">Deep Learning</button>
+            <button class="chip" data-skill="React">React</button>
+            <button class="chip" data-skill="Linux">Linux</button>
+            <button class="chip" data-skill="NLP">NLP</button>
+          </div>
+        </div>
+
+        <button class="recommend-btn" id="recommendBtn" disabled>
+          <span class="btn-text">Analyse My Profile →</span>
+          <span class="btn-loading" style="display:none">Computing…</span>
+        </button>
+        <div class="error-msg" id="errorMsg"></div>
+      </div>
+
+      <!-- Right: Results -->
+      <div class="rec-right">
+        <div class="results-panel" id="resultsPanel">
+          <div class="results-placeholder">
+            <div class="placeholder-icon">◈</div>
+            <p>Your top career matches will appear here after you analyse your profile.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-mark sm">S</span>
+        <strong>SkillAlign</strong>
+        <span class="footer-sep">·</span>
+        <span class="footer-meta">AI Career Recommender</span>
+      </div>
+      <div class="footer-note">Flask · TF-IDF · Cosine Similarity · No external API</div>
+    </div>
+  </footer>
+
+  <script src="/static/js/main.js"></script>
+</body>
+</html>
